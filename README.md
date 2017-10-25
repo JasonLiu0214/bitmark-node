@@ -2,44 +2,49 @@
 
 ## Introduction
 
-bitmark-node is the easiest way for anyone to join the Bitmark network as a fully-validating peer. You can create, verify, and mine Bitmark transactions. Contains the following programs:
+Bitmark node is the easiest way for anyone to join the Bitmark network as a fully-validating peer. You can create, verify, mine Bitmark transactions and get possible reward.  A Bitmark node contains the following programs:
 
  - bitmarkd: Main program
- - prooferd: Mine Bitmark blocks
- - bitmark-wallet: Pay for transactions (support bitcoin / litecoin)
- - bitmark-cli: Command line interface to Main program
- - bitmark-webui: A web user interface for basic control of bitmark-node
+ - prooferd: A tool to mine Bitmark blocks
+ - bitmark-wallet: A wallet for transactions (currently support Bitcoin & Litecoin)
+ - bitmark-cli: Command line interface to bitmarkd
+ - bitmark-webui: A webpage user interface for basic control of Bitmark node
 
-## Chain
 
-Bitmark provide two diffrent chains for the bitmarkd to join in. They are `testing`, `bitmark`.
+## Bitmark Blockchain
+
+Bitmark provides two different chains for a Bitmark node to join in. They are `testing`, `bitmark`, which refer to testnet & livenet respectively. In order to finish a transaction, you need to send Bitcoin or Litecoin to the proofing(mining) Bitcoin or Litecoin address, which can be configured in bitmark-webui.
 
 In order to finish a transaction, you need to send bitcoin or litecoin to the proofing(mining) address of the bitcoin or litecoin which can be configured in the proofing block via web ui.
 
-Please note that: there is a default value given in both chain. Please set your own value if you want to validate a transfer via you own addresses.
+Please note: There are default Bitcoin & Litecoin addresses in both `testing` & `bitmark` chains. Please set your own value if you want to validate a transfer via your own Bitcoin/Litecoin addresses.
 
-Here is a table to indicate what bitmark chain corresponds to which coin chain
+Here is a table that shows correlations between different blockchains.
 
-|   Bitmark    |   Bitcoin   |  Litecoin  |
+|   Bitmark Blockchain  |   Bitcoin Blockchain |  Litecoin Blockchain |
 |    :---:     |    :---:    |    :---:   |
 |   testing    |   testnet   |   testnet  |
 |   bitmark    |   livenet   |   livenet  |
 
 ## Installation
 
-It is simple to install bitmark-node, just install Docker and pull docker image `bitmark-node` from docker hub.
+To run a Bitmark node, you need to have basic understanding of Docker and are able to setup Docker environment
 
-### Fetch
+### Install Docker
 
-After you successfully installed docker, type this command to pull `bitmark-node` image
+Go to Docker website to download and install: https://www.docker.com
+
+### Fetch Bitmark Node in Docker
+
+After you successfully installed docker, use the following command to pull `bitmark-node` image:
 
 ```
 $ docker pull bitmark/bitmark-node
 ```
 
-When the container is first started up, it will generate required keys for you inside the container. A web server is run inside the container and is able to control bitmark services.
+When the Docker container has been started up for the first time, it will generate required keys for you inside the container. A web server is running inside the container and is able to control Bitmark services.
 
-### Run
+### Run Bitmark Node
 
 ```
 $ docker run -d --name bitmarkNode -p 9980:9980 \
@@ -48,7 +53,7 @@ $ docker run -d --name bitmarkNode -p 9980:9980 \
 bitmark/bitmark-node
 ```
 
-The options are:
+The configurable options are:
 
   - Enviornments:
     - PUBLIC_IP: public address to announce
@@ -61,6 +66,10 @@ The options are:
   - Volume:
     - /.config/bitmark-node/bitmarkd/bitmark/data - chain data for bitmark
     - /.config/bitmark-node/bitmarkd/testing/data - chain data for testing
+
+### Web UI
+
+Open web browser and go to  bitmark-webui (PUBLIC_IP:9980) to check  or configure Bitmark blockchain status. 
 
 ### Docker Compose
 
